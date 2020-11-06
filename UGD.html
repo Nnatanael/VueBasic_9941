@@ -20,7 +20,7 @@
         <div>
             <span v-if="status == 'benar' ">
                 <br><p>Selamat Anda Benar!</p> 
-                <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
+                <button  @click="mainlagi" >Main Lagi</button>
             </span>
             
             <span v-else-if="status == 'salah'">
@@ -31,7 +31,7 @@
              <span v-else-if="status == 'kalah'">
                 <br><p>Kesempatan Habis!</p> 
                 <br><p>Angka yang Benar {{ angka }}</p> 
-                <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
+                <button  @click="mainlagi" >Main Lagi</button>
             </span>    
             
         </div>
