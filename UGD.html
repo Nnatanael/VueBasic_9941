@@ -22,13 +22,15 @@
                 <br><p>Selamat Anda Benar!</p> 
                 <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
             </span>
+            
+              
 
             <span v-else-if="status == 'salah'">
                 <br><p>Masih Kurang tepat</p> 
                 <button @click="cobalagi" >Coba Lagi</button>
             </span>
 
-            <span v-else-if="status == 'kalah'">
+             <span v-else-if="status == 'kalah'">
                 <br><p>Kesempatan Habis!</p> 
                 <br><p>Angka yang Benar {{ angka }}</p> 
                 <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
