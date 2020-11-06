@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGD</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div >
+            <h1 >Tebak Angka</h1>
+            <h2 >Silahkan tebak dari 1 - 10</h2>
+            <div >
+                <input type="number"  v-model="angka_tebak" :disabled="isDisabled" placeholder="Masukkan Angka"/><br>
+                Kesempatan tersisa : {{ kesempatan }} <br><br>
+                <button  @click="tebak" :disabled="isDisabled">Tebak</button><br>
+            </div>
+        </div>
+        <div>
+            <span v-if="status == 'benar' ">
+                <br><p>Selamat Anda Benar!</p> 
+                <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
+            </span>
+            
+            <span v-else-if="status == 'kalah'">
+                <br><p>Kesempatan Habis!</p> 
+                <br><p>Angka yang Benar {{ angka }}</p> 
+                <button class="btn btn-primary" @click="mainlagi" >Main Lagi</button>
+            </span>       
+
+            <span v-else-if="status == 'salah'">
+                <br><p>Masih Kurang tepat</p> 
+                <button @click="cobalagi" >Coba Lagi</button>
+            </span>
+            
+        </div>
+        
+        <footer >
+            {{ `${mahasiswa.nama} | ${mahasiswa.npm} | ${mahasiswa.kelas}` }}
+        </footer>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            angka: Math.floor(Math.random() * 10)+1,
+            angka_tebak:null,
+            kesempatan:3,
+            status:"-",
+            isDisabled:false,
+            mahasiswa: {
+                nama:'Naldo Natanael',
+                npm: '180709941',
+                kelas: 'A',
+            },
+            
+        },
+        methods: {
+           tebak(){
+            this.isDisabled = true;
+            if(this.angka_tebak == this.angka){
+                this.status ="benar";
+                
+            }else {
+                    this.status ="salah";
+                    this.kesempatan--;
+                    if(this.kesempatan==0){
+                        this.status="kalah";
+                        this.status = "-";
+                    }
+            console.log(this.angka);
+            }              
+           },
+           cobalagi(){
+                this.isDisabled = false;
+                this.status = "-";
+           },
+           mainlagi(){
+               location.reload();
+           }
+        },
+ 
+    });
+</script>
+</html>
