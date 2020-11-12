@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="vue.js"></script>
+    
+</head>
+
+<body>
+    <div id="app" class="container">
+
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <form  align="center" action="">
+                    <div class="form-group">
+                        <label for="inputTask">Kegiatan yang akan dilakukan</label><br>
+                        <input type="text" v-model="formTodo.task"/>
+                    </div>
+                    <div class="for-group">
+                        <label for="inputPriority">Skala prioritas</label><br>
+                        <select  v-model="formTodo.priority">
+                            <option>Penting</option>
+                            <option>Biasa</option>
+                            <option>Tidak Penting</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNote">Tambahkan catatan</label><br>
+                        <input type="text" v-model="formTodo.note"/>
+                    </div>
+    
+                    <button @click="reset" type="button" class="btn btn-secondary">Reset</button>
+                    <button @click="add" type="button" class="btn btn-primary">Add</button>
+                </form>
+
+                <br>
+
+                <div class="col-8 justify-content-center mx-auto mt-2" style="overflow-y: hidden;">
+                    <div v-for="(item,index) in todos" :key="index">
+                        <div class="card p-4">
+                            <div>
+                                <span class="float-right"><button class="btn btn-sm" @click="delete(index)">x</button></span>
+                                <span v-if="item.priority == 'Penting'" class="badge badge-light text-danger">{{ item.priority }}</span>
+                                <span v-else-if="item.priority == 'Biasa'" class="badge badge-light text-info">{{ item.priority }}</span>
+                                <span v-else="item.priority == 'Tidak Penting'" class="badge badge-light text-warning">{{ item.priority }}</span>
+                                <br>
+                                <h3>{{ item.task }}</h3>
+                                <p>{{ item.note }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <p align="center">{{mahasiswa.nama}} | {{mahasiswa.npm}} | {{mahasiswa.kelas}}</p>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+                mahasiswa: {
+                nama: "Naldo Natanael",
+                npm: "180709941",
+                kelas: "A",
+                },
+                todos: [],
+                formTodo: {
+                    task: null,
+                    priority: null,
+                    note: null,
+                },
+        },
+        methods: {
+            add() {
+                this.todos.push(this.formTodo);
+                this.resetForm();
+            },
+            delete(index) {
+                this.todos.splice(index, 1);
+            },
+            reset() {
+            this.formTodo = {
+                task: null,
+                priority: null,
+                note: null,
+            };
+        },
+        }
+    });
+</script>
+
+</html>
